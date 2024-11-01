@@ -21,7 +21,7 @@ Para crear el reporte usamos `quarto` y los paquetes `lubridate`, `sf`, `tmap`, 
 
 ### Casos de ejemplo
 
-Una versión preliminar de este reporte puede verse en <https://github.com/bienflorencia/LatinR2024>, para dos casos de ejemplo, la [Gran Biobúsqueda del Sur del 2024 en Uruguay](/LatinR2024/code/example_example_GBS2024) y el projecto [Biodiversidad de Punta Ballena](/LatinR2024/code/example_punta_ballena).   
+Una versión preliminar de este reporte puede verse en <https://github.com/bienflorencia/LatinR2024>, para dos casos de ejemplo, la [Gran Biobúsqueda del Sur del 2024 en Uruguay](/LatinR2024/code/example_GBS2024) y el projecto [Biodiversidad de Punta Ballena](/LatinR2024/code/example_punta_ballena).   
 
 ### ¿Cómo se puede colaborar a mejorar `reportiNat`?
 
