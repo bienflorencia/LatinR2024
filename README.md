@@ -4,8 +4,9 @@
 
 *Florencia Grattarola <a dir="ltr" href="http://orcid.org/0000-0001-8282-5732" target="_blank"><img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/commons/0/06/ORCID_iD.svg" width="15"></a>*
 
-Este repositorio contiene una plantilla de `quarto` para reportar resultados de proyectos en iNaturalist (NaturalistaUY para quienes estamos en Uruguay). La plantilla será presentada en la conferencia LatinR 2024 en noviembre y esperamos seguir mejorándola colaborativamente a través de los aportes de la comunidad.
+Este repositorio <https://github.com/bienflorencia/LatinR2024> contiene una plantilla de `quarto` para reportar resultados de proyectos en iNaturalist (NaturalistaUY para quienes estamos en Uruguay). La plantilla será presentada en la conferencia LatinR 2024 en noviembre y esperamos seguir mejorándola colaborativamente a través de los aportes de la comunidad.
 
+Mirá acá la [presentación en LatinR 2024](https://bienflorencia.github.io/LatinR2024/slides/Grattarola_LatinR2024_slides.html).
 
 ### Proyectos en iNaturalist
 
@@ -26,3 +27,5 @@ Una versión preliminar de este reporte puede verse en <https://github.com/bienf
 ### ¿Cómo se puede colaborar a mejorar `reportiNat`?
 
 Para poder mejorar y enriquecer el reporte, el aporte de las comunidades de usuarios/as de iNaturalist en América Latina y LatinR es sumamente importante. Por el momento la plantilla es un html, pero ¿cuál sería el mejor formato a presentar el reporte? ¿debería ser un dashboard? ¿tiene potencial para ser un paquete de R?
+
+Podés dejarme tus comentarios/sugerencias acá <https://github.com/bienflorencia/LatinR2024/discussions/1>. ¡Gracias!
