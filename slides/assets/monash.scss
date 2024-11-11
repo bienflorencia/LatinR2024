@@ -1,0 +1,60 @@
+/*-- scss:defaults --*/
+
+// colors
+$body-bg: #fff !default;
+$body-color: #000 !default;
+$link-color: #74AC00 !default;
+// $link-color-hover: #FFEE91 !default;
+$link-color-hover: darken($link-color, 10%) !default;
+$selection-bg: rgb(102, 102, 102);
+
+// headings
+$presentation-heading-color: #74AC00 !default;
+
+/*-- scss:rules --*/
+
+.reveal .slide blockquote {
+  border-left: 3px solid $text-muted;
+  padding-left: 0.5em;
+}
+
+#title-slide {
+  text-align: left;
+
+  .subtitle,
+  .institute,
+  .url,
+  .quarto-title-affiliation{
+    color: #4f4f4d;
+    //text-align: right;
+    //background-color: #74AC00;
+  }
+  .quarto-title-author-email {
+    font-style: italic;
+    // font-size: 80%;
+    color: #4f4f4d;
+    //background-color: #74AC00;
+  }
+
+  .author, .quarto-title-author-name {
+    color: $body-color;
+    font-size: 120%;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+}
+
+section.has-dark-background a{color:#FFF}
+section.has-dark-background a:hover{color:#97475F}
+
+section.has-dark-background link{color:#ffffff}
+section.has-dark-background link:hover{color:#000000}

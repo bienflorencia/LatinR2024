@@ -1,0 +1,303 @@
+---
+title: "Creación de reportes de proyectos de iNaturalist usando `quarto`"
+format:
+  revealjs: 
+    self-contained: true
+    auto-stretch: true
+    scrollable: true
+    slide-number: true
+    fig-responsive: true
+    preview-links: auto
+    logo: 'img/logo_img.png'
+    footer: <https://github.com/bienflorencia/LatinR2024>
+    enter-title-slide: false
+    theme: [assets/monash.scss]
+    controls: true
+    width: 1280
+    height: 720
+    css: [assets/syntax-highlight.css, assets/custom.css, assets/pacman.css]
+    highlight-style: github
+
+filters:
+  - highlight-text
+
+author:
+  - name: Flo Grattarola
+    affiliation:
+      - name: Czech University of Life Sciences Prague
+        department: Spatial Sciences
+        country: CZ
+    orcid: 0000-0001-8282-5732
+    url: https://flograttarola.com
+    # email: flograttarola@gmail.com
+date: 2024-11-20
+date-format: long
+keywords: 
+  - biodiversidad
+  - ciencia participativa
+  - NaturalistaUY
+  - "`tmap`"
+funding: 'National Geographic Society (NGS-69405C-20)'
+license: 'CC BY'
+copyright: 
+  holder: Florencia Grattarola
+  year: 2024
+lang: es
+---
+
+## iNaturalist y NaturalistaUY
+
+::: columns
+
+::: {.column width="60%"}
+
+[iNaturalist](https://www.inaturalist.org) es una plataforma global de [ciencia participativa]{colour="#FFFFFF" bg-colour="#74AC00"} que permite a las personas cargar sus registros de biodiversidad e identificarlos mediante un proceso de evaluación comunitaria. 
+
+<br>
+
+:::fragment
+[NaturalistaUY](https://www.naturalista.uy) es el sitio de iNaturalist para [Uruguay]{colour="#FFFFFF" bg-colour="#74AC00"} y tenemos por logo este carpincho.
+:::
+
+:::
+::: {.column width="40%"}
+
+![](https://static.inaturalist.org/wiki_page_attachments/1419-original.png)
+
+:::fragment
+![](https://static.inaturalist.org/wiki_page_attachments/3765-original.png)
+:::
+:::
+
+:::
+
+
+## Proyectos en iNaturalist
+
+Una de las grandes funcionalidades de esta plataforma es la creación de [proyectos]{colour="#FFFFFF" bg-colour="#74AC00"} que permiten agrupar observaciones bajo diferentes criterios de selección. 
+
+<br>
+
+```{=html}
+<iframe src="https://www.naturalista.uy/projects" width="1280" height="600"></iframe>
+```
+
+--- 
+
+## Proyectos en iNaturalist
+
+Por ejemplo, permiten agrupar observaciones por: 
+
+:::incremental
+  - [grupo taxonómico]{colour="#FFFFFF" bg-colour="#74AC00"}: insectos, aves, hongos, o guayabos,  
+  - [localización geográfica]{colour="#FFFFFF" bg-colour="#74AC00"}: Uruguay, provincia de Entre Ríos o Parque Nacional Torres del Paine,   
+  - [períodos de tiempo]{colour="#FFFFFF" bg-colour="#74AC00"}: registros tomados durante 4 días en la primavera del hemisferio sur (Gran Biobúsqueda del Sur), o la última semana de mayo en ciudades del mundo (Reto Naturalista Urbano). 
+
+:::
+
+:::fragment
+O también por una combinación de estas variables: mariposas del Uruguay, orquídeas de la provincia de Misiones, o GBS 2024 La Paz Bolivia. 
+:::
+
+## Objetivo
+
+Este trabajo busca generar un *template* o plantilla (`reportiNat`) para el reporte de resultados de proyectos en iNaturalist.
+
+## ¿Por qué hacer una plantilla para el reporte de proyectos?
+
+Cada proyecto en iNaturalist cuenta con su propia [URL]{colour="#FFFFFF" bg-colour="#74AC00"}, donde se muestran estadísticas básicas de las observaciones reunidas bajo el proyecto (sobre observaciones, especies y observadores).   
+
+<br>
+
+`https://www.naturalista.uy/projects/project_id`
+
+<br>
+
+:::fragment
+Sin embargo, a través de la plataforma no es sencillo extraer información más compleja que puede resultar de gran interés para quienes organizan y participan de los proyectos. 
+:::
+
+--- 
+
+## ¿Por qué hacer una plantilla para el reporte de proyectos?
+
+Por ejemplo, en el marco del proyecto:
+
+:::incremental
+  - ¿se registró alguna especie [nueva]{colour="#FFFFFF" bg-colour="#74AC00"} o [rara]{colour="#FFFFFF" bg-colour="#74AC00"} para el lugar o para la plataforma?, 
+  - ¿se registraron especies [amenazadas]{colour="#FFFFFF" bg-colour="#74AC00"} o [no nativas]{colour="#FFFFFF" bg-colour="#74AC00"}?,
+  - ¿en qué [momento del día]{colour="#FFFFFF" bg-colour="#74AC00"} se cargaron más registros?, o 
+  - ¿cuántas [personas se unieron]{colour="#FFFFFF" bg-colour="#74AC00"} a la plataforma a través de este evento? 
+:::
+
+## ¿Cómo funciona `reportiNat`?
+
+Es un archivo `.qmd` que contiene todo el código necesario para generar el reporte.
+
+<br>
+
+:::fragment
+Utiliza los paquetes `lubridate`, `sf`, `tmap`, `geodata`, `wdpar`, `knitr` y `tidyverse` (entre otros).   
+:::
+
+<br>
+
+:::fragment
+Y para obtener los datos usa la [API de iNaturalist]{colour="#FFFFFF" bg-colour="#74AC00"}  <https://api.inaturalist.org> y los paquetes `httr`, y `jsonlite` para hacer las llamadas. 
+:::
+
+---
+
+## ¿Cómo funciona `reportiNat`?
+
+Para generar el reporte se precisa indicar el [ID del proyecto]{colour="#FFFFFF" bg-colour="#74AC00"} generado en iNaturalist. Por ejemplo, `gbs-2024-uruguay`.   
+
+<br>
+
+:::fragment
+Luego, se debe compilar el archivo `quarto` (marcando *Render* o en la terminal como `quarto render reporte.qmd`).  
+:::
+
+<br>
+
+:::fragment
+Al compilar el archivo, se correrán diferentes pedazos o *chunks* de código que permiten descargar los datos y generar el reporte en formato de [archivo html]{colour="#FFFFFF" bg-colour="#74AC00"}. 
+:::
+
+
+---
+
+## ¿Qué cosas reporta? {.smaller}
+
+::: columns
+::: {.column width="33%"}
+:::incremental
+  1. **Observadores**     
+    1.1 Cantidad de personas    
+    1.2 Aportes  
+    1.3 Top 10 de observadores  
+    1.4 Experiencia en la plataforma (usuarios nuevos)  
+    <br>
+    
+  2. **Identificaciones**    
+    2.1 Top 10 de identificadores  
+    2.2 Calidad de las observaciones  
+:::
+:::
+
+::: {.column width="33%"}
+:::incremental
+  3. **Cobertura taxonómica**  
+    3.1 Especies más populares  
+    3.3 Especies nuevas    
+    3.4 Análisis por estados de conservación  
+    3.5 Análisis por medios de establecimiento   
+:::
+:::
+
+::: {.column width="33%"}
+
+:::incremental
+  4. **Cobertura espacial**  
+    4.1 Densidad por departamento  
+    4.2 Registros en áreas protegidas  
+    4.3 Coordenadas oscurecidas  
+ 
+<br>
+    
+  5. **Cobertura temporal**  
+    5.1 Densidad de registros por periodo de tiempo  
+:::
+:::
+:::
+
+
+## Casos de ejemplo
+
+Una versión preliminar de este reporte puede verse en <https://github.com/bienflorencia/LatinR2024>, para dos casos de ejemplo:
+
+1. [Gran Biobúsqueda del Sur del 2024 en Uruguay]{colour="#FFFFFF" bg-colour="#74AC00"}
+2. [Biodiversidad de Punta Ballena]{colour="#FFFFFF" bg-colour="#74AC00"}   
+
+## Caso 1
+
+
+::: columns
+
+::: {.column width="60%"}
+
+![](img/screenshot_GBS2024.png){fig-align="left"}
+
+:::
+::: {.column width="40%"}
+
+**Reporte del proyecto**:  
+[Gran Biobúsqueda del Sur del 2024 en Uruguay](https://bienflorencia.github.io/LatinR2024/code/example_GBS2024)  
+
+<br>
+
+Reúne observaciones tomadas en Uruguay durante 4 días (20-24 de setiembre), en la primavera del hemisferio sur de 2024, como parte del evento *Great Southern Bioblitz*.
+:::
+
+:::
+
+
+
+## Caso 2
+
+
+::: columns
+
+::: {.column width="60%"}
+![](img/screenshot_punta_ballena.png){fig-align="left"}
+
+:::
+::: {.column width="40%"}
+
+**Reporte del proyecto**:   
+[Biodiversidad de Punta Ballena](https://bienflorencia.github.io/LatinR2024/code/example_punta_ballena)
+
+<br>
+
+Reúne todas las observaciones tomadas en Punta Ballena, un área en la costa del país actualmente en conflicto por la construcción de un proyecto inmobiliario.  
+:::
+
+:::
+
+
+## ¿Cómo se puede colaborar a mejorar `reportiNat`?
+
+Para poder mejorar y enriquecer el reporte, el aporte de las comunidades de usuarios/as de iNaturalist en América Latina y LatinR es sumamente importante.  
+
+<br>
+
+:::fragment
+Podés dejarme tus [comentarios/sugerencias]{colour="#FFFFFF" bg-colour="#74AC00"} acá <https://github.com/bienflorencia/LatinR2024/discussions/1>
+:::
+
+## Contacto
+
+<br>
+
+::: columns
+
+::: {.column width="50%"}
+![](img/globe.svg){width="70" height="70"}  [flograttarola.com](https://flograttarola.com)   
+
+![](img/envelope.svg){width="70" height="70"}  [flograttarola@gmail.com](mailto:flograttarola@gmail.com)   
+
+![](img/inaturalist.svg){width="70" height="70"}  [@flo_grattarola](https://www.naturalista.uy/users/flo_grattarola) 
+:::
+
+::: {.column width="50%"}
+![](img/mastodon.svg){width="70" height="70"} [@ecoevo.social@flograttarola ](https://ecoevo.social/@flograttarola)
+
+![](img/bluesky.svg){width="70" height="70"} [@ecoevo.social@flograttarola ](https://ecoevo.social/@flograttarola)
+
+![](img/twitter.svg){width="70" height="70"} [@flograttarola.bsky.social](https://bsky.app/profile/flograttarola.bsky.social)
+:::
+
+:::
+
+
+# [¡Gracias!]{.r-fit-text colour="#FFFFFF" bg-colour="#74AC00"} {style="text-align: center;"} 
