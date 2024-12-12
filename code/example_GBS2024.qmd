@@ -779,7 +779,7 @@ Del total de **`r nums_del_proyecto$observers`** usuarios que cargaron observaci
 
 ## Identificaciones
 
-Un total de `r nums_del_proyecto$observers` personas contribuyeron al proyecto con identificaciones.
+Un total de `r nums_del_proyecto$identifiers` personas contribuyeron al proyecto con identificaciones.
 
 ### Top 10 de identificadores
 
